@@ -5,5 +5,4 @@ imutils
 numpy
 opencv-python
 tensorflow
-
-
+pillow

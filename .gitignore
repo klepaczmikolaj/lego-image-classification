@@ -1,3 +1,9 @@
+# data
+input_data/
+input_data_trim
+validation_data/
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
