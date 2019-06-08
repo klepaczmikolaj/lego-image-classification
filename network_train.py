@@ -9,10 +9,11 @@ from models import MyModel
 matplotlib.use("Agg")
 
 train_data_dir = 'input_data_trim'
+models_dir = 'models/'
 mapping = 'mapping.json'
 validation_split = 0.2
 batch_size = 16
-epoch_number = 100
+epoch_number = 50
 image_size = 160
 
 def parse_args():
@@ -67,13 +68,14 @@ def train_model(model):
 
     model.fit_generator(
         train_generator,
+        verbose=2,
         steps_per_epoch=train_generator.samples // batch_size,
         epochs=epoch_number,
         validation_data=validation_generator,
         validation_steps=validation_generator.samples // batch_size)
 
     print("Model saved to file: {}".format(output_model_file))
-    model.save(output_model_file)
+    model.save(models_dir + output_model_file)
 
 
 if __name__ == "__main__":
@@ -89,7 +91,7 @@ if __name__ == "__main__":
         output_model_file = 'cnv_model.h5'
         model = models_class.get_conv_learn_model()
     elif args.model == 'TRM':
-        output_model_file = 'all_trim_model.h5'
+        output_model_file = 'all_untrim_model.h5'
         model = models_class.get_all_net_trim_model()
     elif args.model == 'SVM':
         output_model_file = 'SVM_model.h5'

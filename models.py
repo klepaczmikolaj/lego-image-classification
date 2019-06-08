@@ -23,7 +23,7 @@ class MyModel:
     def get_conv_learn_model(self):
         (input_tensor, base_model) = self.get_base_model()
 
-        for layer in base_model.layers[:-4]:
+        for layer in base_model.layers[:-3]:
             layer.trainable = False
 
         output_tensor = Dense(20, activation='softmax')(base_model.output)
@@ -39,14 +39,14 @@ class MyModel:
         for layer in base_model.layers:
             layer.trainable = True
 
-        trim = base_model.layers[-6].output
-        output = GlobalAveragePooling2D()(trim)
-        output_tensor = Dense(20, activation='softmax')(output)
+        # trim = base_model.layers[-6].output
+        # output = GlobalAveragePooling2D()(trim)
+        # output_tensor = Dense(20, activation='softmax')(output)
         # UNTRIM
-        # output_tensor = Dense(20, activation='softmax')(base_model.output)
+        output_tensor = Dense(20, activation='softmax')(base_model.output)
 
         model = Model(inputs=input_tensor, outputs=output_tensor)
-        model.compile(optimizer=optimizers.Adam(),
+        model.compile(optimizer=optimizers.Adam(lr=1e-4),
                       loss='categorical_crossentropy',
                       metrics=['categorical_accuracy'])
         return model
@@ -66,7 +66,7 @@ class MyModel:
 
     def get_base_model(self):
         input_tensor = Input(shape=(self.size, self.size, 3))
-        base_model = applications.MobileNetV2(
+        base_model = applications.VGG16(
             include_top=False,
             weights='imagenet',
             input_tensor=input_tensor,
