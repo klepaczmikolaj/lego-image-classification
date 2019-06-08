@@ -3,6 +3,9 @@ input_data/
 input_data_trim
 validation_data/
 
+*.h5
+mapping.json
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
