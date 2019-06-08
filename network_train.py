@@ -10,7 +10,7 @@ matplotlib.use("Agg")
 
 train_data_dir = 'input_data_trim'
 mapping = 'mapping.json'
-validation_split = 0.25
+validation_split = 0.2
 batch_size = 16
 epoch_number = 100
 image_size = 160
