@@ -40,8 +40,6 @@ predict = model.predict_generator(test_generator,steps = nb_samples)
 
 y_true = test_generator.classes
 y_true = label_binarize(y_true, classes=list(range(20)))
-print(y_true)
-print(predict[80])
 
 # Compute ROC curve and ROC area for each class
 fpr = dict()
@@ -52,11 +50,18 @@ for i in range(20):
     fpr[i], tpr[i], _ = roc_curve(y_true[:, i], predict[:, i])
     roc_auc[i] = auc(fpr[i], tpr[i])
 
-plt.plot(fpr[0], tpr[0], color='aqua', lw=2,
-             label='ROC curve of class {0} (area = {1:0.2f})'.format(0, roc_auc[0]))
+chart_count = 4
+curves_per_chart = 5
+colors = ['r', 'b', 'g', 'c', 'm']
 
-plt.legend()
-plt.savefig(args.model + '.png')
+for chart in range(chart_count):
+    plt.figure(chart + 1)
+    for i in range(curves_per_chart):
+        cur = chart * chart_count + i
+        plt.plot(fpr[cur], tpr[cur], color=colors[i], lw=2,
+                    label='ROC curve of class {0} (area = {1:0.2f})'.format(cur, roc_auc[cur]))
+    plt.legend()
+    plt.savefig(args.model + '_' + str(chart) + '.png')
 
 
 '''
