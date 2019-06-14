@@ -1,3 +1,13 @@
+# data
+input_data/
+input_data_trim/
+input_data_test/
+validation_data/
+
+*.h5
+mapping.json
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
