@@ -63,26 +63,3 @@ for chart in range(chart_count):
     plt.legend()
     plt.savefig(args.model + '_' + str(chart) + '.png')
 
-
-'''
-# load image
-
-image = cv2.imread(args.images)
-
-# pre-process the image for classification
-image = cv2.resize(image, (image_height, image_width))
-image = image.astype("float") / 255.0
-image = img_to_array(image)
-image = np.expand_dims(image, axis=0)
-
-# classify image
-model = load_model(args.model)
-result = model.predict(image)
-res_class = result.argmax(axis=-1)[0]
-
-with open("mapping.json") as f_in:
-    mapping = json.loads(f_in.read())
-for name, no in mapping.items():
-    if no == res_class:
-        print(name)
-'''
