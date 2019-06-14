@@ -57,7 +57,7 @@ colors = ['r', 'b', 'g', 'c', 'm']
 for chart in range(chart_count):
     plt.figure(chart + 1)
     for i in range(curves_per_chart):
-        cur = chart * chart_count + i
+        cur = chart * curves_per_chart + i
         plt.plot(fpr[cur], tpr[cur], color=colors[i], lw=2,
                     label='ROC curve of class {0} (area = {1:0.2f})'.format(cur, roc_auc[cur]))
     plt.legend()
