@@ -1,6 +1,5 @@
 import matplotlib
-from keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
-from sklearn.model_selection import train_test_split
+from keras.preprocessing.image import ImageDataGenerator
 import os
 import json
 import argparse
@@ -16,6 +15,7 @@ batch_size = 16
 epoch_number = 50
 image_size = 160
 
+
 def parse_args():
     # construct the argument parse and parse the arguments
     parser = argparse.ArgumentParser()
@@ -23,10 +23,9 @@ def parse_args():
                         help='''specify model type: with one of the following:
                                 CLS - only classif layer learn,
                                 CNV - learning of last conv layer, 
-                                TRM - all network train with trim, 
-                                SVM - TRM with SVM''')
+                                TRM - all network train with trim''')
     args = parser.parse_args()
-    if(args.model not in ['CLS', 'CNV', 'TRM', 'SVM']):
+    if args.model not in ['CLS', 'CNV', 'TRM']:
         print("Wrong console argument, exiting")
         exit(1)
     return args
@@ -93,10 +92,7 @@ if __name__ == "__main__":
     elif args.model == 'TRM':
         output_model_file = 'all_untrim_model.h5'
         model = models_class.get_all_net_trim_model()
-    elif args.model == 'SVM':
-        output_model_file = 'SVM_model.h5'
-        model = models_class.get_svm_model()
     else:
-        print("Wrong model, use one of following: 'CLS', 'CNV', 'TRM', 'SVM'")
+        print("Wrong model, use one of following: 'CLS', 'CNV', 'TRM'")
         exit(1)
     train_model(model)
