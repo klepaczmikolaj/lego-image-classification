@@ -1,6 +1,6 @@
 from keras import applications, optimizers
 from keras.models import Model
-from keras.layers import Dense, Input, Dropout, GlobalAveragePooling2D
+from keras.layers import Dense, Input
 
 
 class MyModel:

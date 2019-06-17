@@ -1,13 +1,7 @@
-# import the necessary packages
-from keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
+from keras.preprocessing.image import ImageDataGenerator
 from keras.models import load_model
-import numpy as np
 import argparse
-import imutils
-import cv2
-import json
 import matplotlib.pyplot as plt
-import numpy
 from sklearn.metrics import roc_curve, auc
 from sklearn.preprocessing import label_binarize
 
